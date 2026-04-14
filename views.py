@@ -1,16 +1,59 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
+from django.shortcuts import render, redirect
+from .models import User
+from courses.models import Course
 def index(request):
-    return render(request,'base.html')
+    return render(request, 'base.html')
 
 def signup(request):
-     return render(request,'users/sign-up.html')
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        role = request.POST.get('role')
+        
+        User.objects.create(
+            username=username,
+            email=email,
+            password=password,
+            role=role
+        )
+        return redirect('login')
+    
+    return render(request, 'users/sign-up.html')
+
 def login(request):
-     if request.method=="POST":
-            username=request.POST.get('username')
-            password=request.POST.get('password')
-            print(username,password)
-     
-     
-     return render(request,'users/login.html')
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # Database mein dhundho
+        user = User.objects.filter(
+            username=username,
+            password=password
+        ).first()
+        
+        if user:
+            # Session mein save karo
+            request.session['user_id'] = user.id
+            request.session['user_role'] = user.role
+            
+            # Role check karo
+            if user.role == 'teacher':
+                return redirect('teacher_dashboard')
+            else:
+                return redirect('student_dashboard')
+        else:
+            return render(request, 'users/login.html', 
+                        {'error': 'Invalid username or password!'})
+    
+    return render(request, 'users/login.html')
+
+
+def teacher_dashboard(request):
+     user_id = request.session['user_id']
+     courses = Course.objects.filter(teacher_id=user_id)
+     return render(request, 'users/teacher_dashboard.html', {'courses': courses})
+
+   
+def student_dashboard(request):
+    return render(request,'users/student_dashboard.html')

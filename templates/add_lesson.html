@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+/* lesson.css */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    color: #0077b5; /* LinkedIn blue */
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #0077b5;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    background-color: #0077b5;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005f8a;
+}
+
+</style>
+
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Lesson Title">
+    <textarea name="content" placeholder="Lesson Content"></textarea>
+    <button type="submit">Add Lesson</button>
+</form>
+
+{% endblock content %}

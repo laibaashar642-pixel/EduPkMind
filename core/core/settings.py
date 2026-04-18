@@ -103,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-GROQ_API_KEY = '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'
+""" GROQ_API_KEY = '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' """
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/

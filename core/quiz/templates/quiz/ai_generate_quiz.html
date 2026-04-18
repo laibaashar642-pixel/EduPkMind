@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+form {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    text-align: center;
+}
+h2 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+input[type="text"] {
+    width: 80%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+button[type="submit"] {
+    padding: 12px 25px;
+    background-color: #0078d7;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+button[type="submit"]:hover {
+    background-color: #005fa3;
+}
+</style>
+
+<h2>AI Quiz Generator 🤖</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="topic" placeholder="Topic likho e.g. Python Loops">
+    <button type="submit">Generate Quiz!</button>
+</form>
+
+{% endblock content %}

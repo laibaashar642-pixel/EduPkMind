@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+
+/* General page styling */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main heading */
+h2 {
+    text-align: center;
+    color: #333;
+    margin: 40px 0 20px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* Browse Courses button */
+a {
+    display: block;
+    text-align: center;
+    margin: 0 auto 30px;
+    padding: 12px 20px;
+    max-width: 220px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+/* Subheading */
+h3 {
+    text-align: center;
+    color: #444;
+    margin: 20px 0 15px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+/* Enrolled courses list */
+.enrolled-course {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 10px auto;
+    max-width: 500px;
+    text-align: center;
+    font-size: 16px;}
+
+</style>
+<h2>Welcome Student!</h2>
+<a href="{% url 'course_list' %}">Browse Courses</a>
+
+
+<h3>My Enrolled Courses</h3>
+{% for enrollment in enrollments %}
+    <p>{{ enrollment.course.title }}</p>
+
+     {% for lesson in enrollment.course.lesson_set.all %}
+            <p>→ {{ lesson.title }}</p>
+            <a href="{% url 'take_quiz' lesson.id %}" class="btn">Take Quiz</a>
+             <a href="{% url 'generate_certificate' enrollment.course.id %}" class="btn">🎓 Get Certificate</a>
+        {% endfor %}
+{% empty %}
+    <p>No courses enrolled yet!</p>
+{% endfor %}
+
+
+{% endblock content %}

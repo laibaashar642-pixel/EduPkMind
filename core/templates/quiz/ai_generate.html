@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>AI Quiz Generator</h2>
+<form method="POST">
+{% csrf_token %}
+<input type="text" name="topic" placeholder="Topic likho">
+<button type="submit">Generate Quiz!</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+.course-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+}
+.course-card p {
+    margin: 0 0 10px;
+}
+.course-card a {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+.course-card a:hover {
+    background-color: #0056b3;
+}
+
+
+</style>
+
+<h2>Available Courses</h2>
+
+{% for course in courses %}
+    <div class="course-card">
+        <p><strong>{{ course.title }}</strong></p>
+        <p>{{ course.description }}</p>
+        <a href="{% url 'enroll_course' course.id %}">Join Course</a>
+    </div>
+{% empty %}
+    <p style="text-align:center;">No courses available!</p>
+{% endfor %}
+
+{% endblock content %}

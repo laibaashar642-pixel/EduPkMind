@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+/* General page styling */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Container */
+form {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+/* Input field */
+input[type="text"] {
+    width: 80%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #0078d7;
+    outline: none;
+    box-shadow: 0 0 6px rgba(0,120,215,0.3);
+}
+
+/* Button */
+button[type="submit"] {
+    padding: 12px 25px;
+    background-color: #0078d7;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #005fa3;
+    transform: scale(1.05);
+}
+
+
+</style>
+<h2>AI Quiz Generator 🤖</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="topic" placeholder="Topic likho e.g. Python Loops">
+    <button type="submit">Generate Quiz!</button>
+</form>
+
+{% endblock content %}

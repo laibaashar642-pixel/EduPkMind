@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+/* General page styling */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Result container */
+h2, h3 {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    color: #2c3e50;
+}
+
+h2 {
+    font-size: 28px;
+    margin-top: 40px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #0078d7;
+}
+
+/* Dashboard link */
+a {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    padding: 12px 20px;
+    width: 220px;
+    background-color: #0078d7;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+a:hover {
+    background-color: #005fa3;
+}
+
+
+</style>
+<h2>Quiz Result</h2>
+<h3>Your Score: {{ score }} / {{ total }}</h3>
+<a href="{% url 'student_dashboard' %}">Back to Dashboard</a>
+
+{% endblock content %}
